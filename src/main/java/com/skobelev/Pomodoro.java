@@ -11,7 +11,7 @@ public class Pomodoro {
         System.out.println("Hello, Pomodoro. Введите команду");
         String[] cmd = new Scanner(System.in).nextLine().split(" ");
 
-        int workMin = 25;
+        int workMin = 5;
         int breakMin = 5;
         int count = 1;
         int help = 0;
@@ -30,14 +30,21 @@ public class Pomodoro {
                 case "-count" -> count = Integer.parseInt(cmd[++i]);
             }
         }
+
+
         if (help == 0) {
             long startTime = System.currentTimeMillis();
             for (int i = 1; i <= count; i++){
                 timer (workMin, breakMin, sizePrint);
+                if (count > 1){
+                    workMin = workMin + workMin;
+                }
             }
             long endTime = System.currentTimeMillis();
             System.out.println("Pomodoro таймер истек: " + (endTime - startTime)/(1000 * 60));
         }
+
+
     }
     private static void timer (int workTime, int breakTime, int sizeProgressBar) throws InterruptedException {
         printProgress("Время вкалывать: ", workTime, sizeProgressBar);
