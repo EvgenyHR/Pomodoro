@@ -14,26 +14,23 @@ public class Pomodoro {
         int workMin = 25;
         int breakMin = 5;
         int count = 1;
+        int help = 0;
 
         int sizePrint = 30;
         // длинна рисунка "ПрогрессБар"
-
-        boolean isCallHelp = false;
 
         for (int i = 0; i < cmd.length; i++){
             switch (cmd[i]){
                 case "-help" -> {
                     printHelpMsg();
-                    isCallHelp = true;
+                    help = 1;
                 }
                 case "-w" -> workMin = Integer.parseInt(cmd[++i]);
                 case "-b" -> breakMin = Integer.parseInt(cmd[++i]);
                 case "-count" -> count = Integer.parseInt(cmd[++i]);
             }
         }
-        if (!isCallHelp) {
-            System.out.printf("работаем %d min, " +
-                    "отдыхаем %d min, кол-во подходов %d\n", workMin, breakMin, count);
+        if (help == 0) {
             long startTime = System.currentTimeMillis();
             for (int i = 1; i <= count; i++){
                 timer (workMin, breakMin, sizePrint);
